@@ -9,7 +9,8 @@ from __future__ import annotations
 from .main import main
 from .mean import mean
 from .median import median
+from .percentile import percentile
 from .spread import spread
 from .summarize import summarize
 
-__all__ = ["main", "mean", "median", "spread", "summarize"]
+__all__ = ["main", "mean", "median", "percentile", "spread", "summarize"]

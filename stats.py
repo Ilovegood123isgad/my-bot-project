@@ -8,11 +8,11 @@ from __future__ import annotations
 
 import sys
 
-from statslib import main, mean, median, spread, summarize
+from statslib import main, mean, median, percentile, spread, summarize
 # Re-exported for compatibility with the previous stats.py.
 from statslib.main import __version__
 
-__all__ = ["main", "mean", "median", "spread", "summarize"]
+__all__ = ["main", "mean", "median", "percentile", "spread", "summarize"]
 
 
 if __name__ == "__main__":
