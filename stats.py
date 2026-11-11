@@ -25,7 +25,9 @@ def median(values: list[float]) -> float:
         raise ValueError("median() needs at least one value")
     ordered = sorted(values)
     middle = len(ordered) // 2
-    return ordered[middle]
+    if len(ordered) % 2 == 1:
+        return ordered[middle]
+    return (ordered[middle - 1] + ordered[middle]) / 2
 
 
 def spread(values: list[float]) -> float:
