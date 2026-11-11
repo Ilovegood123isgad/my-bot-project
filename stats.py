@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small statistics helpers used by the sample project.
+"""Compatibility layer for the statslib package.
 
 Run `python3 stats.py 1 2 3 4` to print a summary of the numbers.
 """
@@ -8,66 +8,11 @@ from __future__ import annotations
 
 import sys
 
-__version__ = "1.0.0"
+from statslib import main, mean, median, percentile, spread, summarize
+# Re-exported for compatibility with the previous stats.py.
+from statslib.main import __version__
 
-
-def mean(values: list[float]) -> float:
-    """Arithmetic mean of a non-empty sequence."""
-    if not values:
-        raise ValueError("mean() needs at least one value")
-    return sum(values) / len(values)
-
-
-def median(values: list[float]) -> float:
-    """Middle value of a non-empty sequence.
-
-    For an even number of values this is the average of the two middle ones.
-    """
-    if not values:
-        raise ValueError("median() needs at least one value")
-    ordered = sorted(values)
-    middle = len(ordered) // 2
-    if len(ordered) % 2 == 1:
-        return ordered[middle]
-    return (ordered[middle - 1] + ordered[middle]) / 2
-
-
-def spread(values: list[float]) -> float:
-    """Difference between the largest and the smallest value."""
-    if not values:
-        raise ValueError("spread() needs at least one value")
-    return max(values) - min(values)
-
-
-def summarize(values: list[float]) -> str:
-    """One-line human readable summary."""
-    return (
-        f"count={len(values)} "
-        f"mean={mean(values):.2f} "
-        f"median={median(values):.2f} "
-        f"spread={spread(values):.2f}"
-    )
-
-
-def main(argv: list[str]) -> int:
-    """Run the command line interface.
-
-    :param argv: command line arguments, without the program name.
-    :return: process exit code.
-    """
-    if argv == ["--version"]:
-        print(f"stats {__version__}")
-        return 0
-    if not argv:
-        print("usage: python3 stats.py <number> [<number> ...]", file=sys.stderr)
-        return 2
-    try:
-        values = [float(item) for item in argv]
-    except ValueError:
-        print("every argument must be a number", file=sys.stderr)
-        return 2
-    print(summarize(values))
-    return 0
+__all__ = ["main", "mean", "median", "percentile", "spread", "summarize"]
 
 
 if __name__ == "__main__":
