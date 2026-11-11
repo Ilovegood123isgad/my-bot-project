@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import sys
 
+__version__ = "1.0.0"
+
 
 def mean(values: list[float]) -> float:
     """Arithmetic mean of a non-empty sequence."""
@@ -48,6 +50,14 @@ def summarize(values: list[float]) -> str:
 
 
 def main(argv: list[str]) -> int:
+    """Run the command line interface.
+
+    :param argv: command line arguments, without the program name.
+    :return: process exit code.
+    """
+    if argv == ["--version"]:
+        print(f"stats {__version__}")
+        return 0
     if not argv:
         print("usage: python3 stats.py <number> [<number> ...]", file=sys.stderr)
         return 2
